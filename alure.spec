@@ -8,7 +8,7 @@ Name:		alure
 Summary:	Audio Library Tools REloaded
 Group:		System/Libraries
 Version:	1.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+ 
 URL:		http://kcat.strangesoft.net/alure.html
 Source0:	http://kcat.strangesoft.net/%{name}-releases/%{name}-%{version}.tar.bz2
@@ -50,6 +50,8 @@ Summary:	Alure development files
 Group:		Development/C++
 License:	LGPLv2+,GPLv2+
 Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
 
 %description -n %libnamedev
 Libraries and header files to develop applications that use %{name}.
@@ -62,7 +64,7 @@ file loading, and streaming.
 %defattr(-,root,root)
 %doc COPYING
 %_docdir/%name
-%{_includedir}/AL
+%{_includedir}/AL/
 %{_libdir}/libalure.so
 %{_libdir}/pkgconfig/alure*.pc
 
