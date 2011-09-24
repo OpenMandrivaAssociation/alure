@@ -1,14 +1,14 @@
 %define major 1
-%define libname %mklibname %name %major
-%define libnamedev %mklibname %name -d
-%define libnamedevst %mklibname %name -d -s
+%define libname %mklibname %{name} %major
+%define libnamedev %mklibname %{name} -d
+%define libnamedevst %mklibname %{name} -d -s
 
 
 Name:		alure
 Summary:	Audio Library Tools REloaded
 Group:		System/Libraries
-Version:	1.1
-Release:	%mkrel 2
+Version:	1.2
+Release:	%mkrel 1
 License:	LGPLv2+ 
 URL:		http://kcat.strangesoft.net/alure.html
 Source0:	http://kcat.strangesoft.net/%{name}-releases/%{name}-%{version}.tar.bz2
@@ -29,7 +29,7 @@ file loading, and streaming.
 
 #------------------------------------------------------------------------------
 %package -n %libname
-Summary:	%name library
+Summary:	%{name} library
 Group:		System/Libraries
 
 %files -n %libname
@@ -37,7 +37,7 @@ Group:		System/Libraries
 %{_libdir}/libalure.so.%{major}*
 
 %description -n %libname
-Libraries needed by %name.
+Libraries needed by %{name}.
 
 ALURE is a utility library to help manage common tasks with OpenAL 
 applications. This includes device enumeration and initialization, 
@@ -63,8 +63,8 @@ file loading, and streaming.
 %files -n %libnamedev
 %defattr(-,root,root)
 %doc COPYING
-%_docdir/%name
-%{_includedir}/AL/
+%{_docdir}/%{name}
+%{_includedir}/AL
 %{_libdir}/libalure.so
 %{_libdir}/pkgconfig/alure*.pc
 
