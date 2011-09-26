@@ -102,4 +102,6 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
-
+%files
+%defattr(-,root,root)
+%{_bindir}/*
