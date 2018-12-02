@@ -7,11 +7,12 @@ Name:		alure
 Summary:	Audio Library Tools REloaded
 Group:		System/Libraries
 Version:	1.2
-Release:	3
+Release:	4
 License:	LGPLv2+
 URL:		http://kcat.strangesoft.net/alure.html
 Source0:	http://kcat.strangesoft.net/%{name}-releases/%{name}-%{version}.tar.bz2
 Patch0:		alure-gcc47.patch
+Patch1:		alure-dumb2.patch
 BuildRequires:	cmake
 BuildRequires:	dumb-devel
 BuildRequires:	pkgconfig(flac)
@@ -88,6 +89,7 @@ file loading, and streaming.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p1
 
 %build
 %cmake
