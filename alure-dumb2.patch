@@ -1,11 +1,20 @@
---- alure-1.2/src/codec_dumb.cpp~	2011-07-29 09:37:48.000000000 +0100
-+++ alure-1.2/src/codec_dumb.cpp	2018-12-02 07:40:41.524243606 +0000
+--- alure-1.2/src/codec_dumb.cpp.orig	2018-12-02 10:31:47.767013912 +0000
++++ alure-1.2/src/codec_dumb.cpp	2018-12-02 10:36:38.086035696 +0000
+@@ -272,7 +272,7 @@
+ 
+ private:
+     // DUMBFILE iostream callbacks
+-    static int skip(void *user_data, long offset)
++    static int skip(void *user_data, dumb_off_t offset)
+     {
+         std::istream *stream = static_cast<dumbStream*>(user_data)->fstream;
+         stream->clear();
 @@ -282,7 +282,7 @@
          return -1;
      }
  
 -    static long read(char *ptr, long size, void *user_data)
-+    static long read(char *ptr, size_t size, void *user_data)
++    static dumb_ssize_t read(char *ptr, size_t size, void *user_data)
      {
          std::istream *stream = static_cast<dumbStream*>(user_data)->fstream;
          stream->clear();
