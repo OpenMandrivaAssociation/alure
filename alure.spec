@@ -7,7 +7,7 @@ Name:		alure
 Summary:	Audio Library Tools REloaded
 Group:		System/Libraries
 Version:	1.2
-Release:	4
+Release:	5
 License:	LGPLv2+
 URL:		http://kcat.strangesoft.net/alure.html
 Source0:	http://kcat.strangesoft.net/%{name}-releases/%{name}-%{version}.tar.bz2
@@ -95,8 +95,7 @@ file loading, and streaming.
 %cmake
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 %files
 %{_bindir}/*
-
