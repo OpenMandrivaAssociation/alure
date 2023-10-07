@@ -1,5 +1,6 @@
 %define major 1
-%define libname %mklibname %{name} %{major}
+%define oldlibname %mklibname %{name} %{major}
+%define libname %mklibname %{name}
 %define libnamedev %mklibname %{name} -d
 %define libnamedevst %mklibname %{name} -d -s
 
@@ -7,13 +8,16 @@ Name:		alure
 Summary:	Audio Library Tools REloaded
 Group:		System/Libraries
 Version:	1.2
-Release:	5
+Release:	6
 License:	LGPLv2+
-URL:		http://kcat.strangesoft.net/alure.html
-Source0:	http://kcat.strangesoft.net/%{name}-releases/%{name}-%{version}.tar.bz2
+# Also: https://kcat.tomasu.net/alure.html
+# Also: git://repo.or.cz/alure.git
+URL:		https://github.com/kcat/alure
+Source0:	https://kcat.tomasu.net/alure-releases/alure-%{version}.tar.bz2
 Patch0:		alure-gcc47.patch
 Patch1:		alure-dumb2.patch
 BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	dumb-devel
 BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(fluidsynth)
@@ -26,11 +30,11 @@ ALURE is a utility library to help manage common tasks with OpenAL
 applications. This includes device enumeration and initialization, 
 file loading, and streaming.
 
-
 #------------------------------------------------------------------------------
 %package -n %{libname}
 Summary:	%{name} library
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %files -n %{libname}
 %{_libdir}/libalure.so.%{major}*
@@ -41,7 +45,6 @@ Libraries needed by %{name}.
 ALURE is a utility library to help manage common tasks with OpenAL 
 applications. This includes device enumeration and initialization, 
 file loading, and streaming.
-
 
 #------------------------------------------------------------------------------
 %package -n %{libnamedev}
@@ -66,7 +69,6 @@ file loading, and streaming.
 %{_libdir}/libalure.so
 %{_libdir}/pkgconfig/alure*.pc
 
-
 #------------------------------------------------------------------------------
 %package -n %{libnamedevst}
 Summary:	Alure static library
@@ -84,18 +86,18 @@ file loading, and streaming.
 %files -n %{libnamedevst}
 %{_libdir}/libalure-static.a
 
-
 #------------------------------------------------------------------------------
 %prep
-%setup -q
-%patch0 -p0
-%patch1 -p1
+%autosetup -p1
+
+%cmake -G Ninja
+sed -i -e 's,\;, ,g' build.ninja
 
 %build
-%cmake
+%ninja_build -C build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 %files
 %{_bindir}/*
